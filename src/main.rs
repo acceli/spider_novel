@@ -11,7 +11,10 @@ use std::fs::OpenOptions; // 引入文件操作库
 fn create_client() -> Result<reqwest::Client, Box<dyn Error>> {
     let mut headers = HeaderMap::new();
     headers.insert("User-Agent", "Mozilla/5.0 ... Chrome/119.0.0.0 Safari/537.36".parse()?);
-    Ok(reqwest::Client::builder().default_headers(headers).build()?)
+    Ok(reqwest::Client::builder()
+        .danger_accept_invalid_certs(true)
+        .default_headers(headers)
+        .build()?)
 }
 
 // 编码搜索关键字为 GBK
