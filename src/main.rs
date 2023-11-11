@@ -114,7 +114,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let search_key = search_key.trim(); // 现在这里是唯一一处对 search_key 的引用
     match search(&client, search_key).await {
         Ok((title, author, node_url)) => {
-            println!("搜索命中！名称：{} 作者: {}, 回车确认下载，Ctrl C退出", title, author);
+            println!("\n搜索命中！名称：{} 作者: {}\n\n回车确认下载，Ctrl C退出", title, author);
             let mut confirm = String::new();
             io::stdin().read_line(&mut confirm)?; // 使用新的变量进行确认输入
 
@@ -135,7 +135,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 println!("进度: {:.2}%", progress);
             }
 
-            println!("小说 '{}' 下载完成！", search_key);
+            println!("小说 '{}' 下载完成，回车退出！", file_name);
+            io::stdin().read_line(&mut confirm)?; // 使用新的变量进行确认输入
             Ok(())
         },
         Err(e) => {
