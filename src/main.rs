@@ -119,7 +119,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
             io::stdin().read_line(&mut confirm)?; // 使用新的变量进行确认输入
 
             let node_list = get_node_list(&client, &node_url).await?;
-            let file_name = format!("{}.txt", search_key); // 使用不可变借用
+            let file_name = format!("{}.txt", title); // 使用不可变借用
             let mut file = OpenOptions::new()
                 .append(true)
                 .create(true)
